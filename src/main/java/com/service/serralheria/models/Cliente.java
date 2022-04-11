@@ -1,9 +1,8 @@
 package com.service.serralheria.models;
 
-import com.sun.istack.NotNull;
-import net.bytebuddy.implementation.bind.annotation.Default;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,36 +11,48 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @NotNull
-    @Column
+    @NotBlank
+    @Column(nullable = false)
     private String nome;
 
-    @NotNull
-    @Column
-    private String telefone;
+    @Column(nullable = false)
+    private int telefone;
 
-    @NotNull
-    @Column
-    private String tipoServico;
+    @NotBlank
+    @Column(nullable = false)
+    private String servico;
 
-    @NotNull
-    @Column
+    @NotBlank
+    @Column(nullable = false)
     private String bairro;
 
-    @NotNull
-    @Column
+    @NotBlank
+    @Column(nullable = false)
     private String endereco;
 
-    @NotNull
-    @Column
-    private double valorServico;
+    @Column(nullable = false)
+    private int valor;
 
-    @Column
-    private Date data;
+    @Column(nullable = false)
+    private String data;
 
-    @Column
-    private String possuiNota = "Não";
+    @Column(nullable = false)
+    private String nota;
+
+    @Column(nullable = false)
+    private LocalDate dataAgendamento;
+
+    @Column(nullable = false)
+    private String horario;
+
+
+    public String getHorario() {
+        return horario;
+    }
+
+    public void setHorario(String horario) {
+        this.horario = horario;
+    }
 
     public Long getId() {
         return id;
@@ -59,20 +70,20 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public String getTelefone() {
+    public int getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(int telefone) {
         this.telefone = telefone;
     }
 
-    public String getTipoServico() {
-        return tipoServico;
+    public String getServico() {
+        return servico;
     }
 
-    public void setTipoServico(String tipoServico) {
-        this.tipoServico = tipoServico;
+    public void setServico(String servico) {
+        this.servico = servico;
     }
 
     public String getBairro() {
@@ -91,27 +102,37 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public double getValorServico() {
-        return valorServico;
+    public int getValor() {
+        return valor;
     }
 
-    public void setValorServico(double valorServico) {
-        this.valorServico = valorServico;
+    public void setValor(int valor) {
+        this.valor = valor;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
-    public String getPossuiNota() {
-        return possuiNota;
+    public String getNota() {
+        return nota;
     }
 
-    public void setPossuiNota(String possuiNota) {
-        this.possuiNota = possuiNota;
+    public void setNota(String nota) {
+        this.nota = nota;
     }
+
+    public LocalDate getDataAgendamento() {
+        return dataAgendamento;
+    }
+
+    public void setDataAgendamento(LocalDate dataAgendamento) {
+        this.dataAgendamento = dataAgendamento;
+    }
+
+
 }

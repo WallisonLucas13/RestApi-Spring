@@ -1,76 +1,53 @@
 package com.service.serralheria.controllers;
+
 import com.service.serralheria.models.Cliente;
 import com.service.serralheria.repository.ClienteRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("/")
 public class ClienteController {
 
     @Autowired
     private ClienteRepository clientes;
 
+    //Add New
     @PostMapping
-    public Cliente adicionar(@RequestBody Cliente cliente){
-        cliente.setData(new Date());
-        return clientes.save(cliente);
+    public ResponseEntity cadastrar(@RequestBody @Valid Cliente cliente){
+        Date data = new Date();
+        String date = new SimpleDateFormat("dd/MM/yyyy").format(data);
+        cliente.setData(date);
+        clientes.save(cliente);
+        return ResponseEntity.ok().build();
     }
+    //---------------------------------------------------------------------------
 
+    //List
     @GetMapping
     public List<Cliente> listar(){
         return clientes.findAll();
     }
+    //--------------------------------------------------------------
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> buscar(@PathVariable("id") Long id){
-        Optional<Cliente> cliente = clientes.findById(id);
+    //Delete
+    @DeleteMapping("{id}")
+    public ResponseEntity deletar(@PathVariable("id") Long id){
+        Optional<Cliente> c = clientes.findById(id);
 
-        if(cliente.isPresent() == false){
-            return ResponseEntity.notFound().build();
-        }
-        ResponseEntity<Cliente> clienteEntity = ResponseEntity.of(cliente);
-        Cliente clienteObject = clienteEntity.getBody();
-        return ResponseEntity.ok(clienteObject);
+            if (c.isPresent() == false) {
+                return ResponseEntity.notFound().build();
+            }
+            clientes.deleteById(id);
+            return ResponseEntity.ok().build();
     }
+    //-----------------------------------------------------------------
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Cliente> atualizar(@PathVariable("id") Long id, @RequestBody Cliente clienteBody){
-
-        Optional<Cliente> clienteExistente = clientes.findById(id);
-        ResponseEntity<Cliente> clienteEntity = ResponseEntity.of(clienteExistente);
-        Cliente clienteObject = clienteEntity.getBody();
-
-        if(clienteExistente.isPresent() == false){
-            return ResponseEntity.notFound().build();
-        }
-
-        BeanUtils.copyProperties(clienteBody, clienteObject, "id","data");
-
-        clientes.save(clienteObject);
-
-        return ResponseEntity.ok(clienteObject);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> remover(@PathVariable("id") Long id){
-        Optional<Cliente> cliente = clientes.findById(id);
-
-        if(cliente.isPresent() == false){
-            ResponseEntity.notFound().build();
-        }
-
-        ResponseEntity<Cliente> clienteEntity = ResponseEntity.of(cliente);
-        Cliente clienteObject = clienteEntity.getBody();
-
-        clientes.delete(clienteObject);
-        return ResponseEntity.noContent().build();
-    }
-}
+ }
