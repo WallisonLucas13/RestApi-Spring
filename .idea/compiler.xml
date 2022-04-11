@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="serralheria" target="15" />
+      <module name="serralheria" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
