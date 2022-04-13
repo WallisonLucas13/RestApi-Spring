@@ -1,14 +1,16 @@
 package com.service.serralheria.models;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class Cliente {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name="increment", strategy = "increment")
     private Long id;
 
     @NotBlank
