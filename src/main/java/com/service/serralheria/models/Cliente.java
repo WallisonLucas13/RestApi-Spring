@@ -18,7 +18,7 @@ public class Cliente {
     private String nome;
 
     @Column(nullable = false)
-    private String telefone;
+    private int telefone;
 
     @NotBlank
     @Column(nullable = false)
@@ -72,11 +72,11 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public String getTelefone() {
+    public int getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(int telefone) {
         this.telefone = telefone;
     }
 
