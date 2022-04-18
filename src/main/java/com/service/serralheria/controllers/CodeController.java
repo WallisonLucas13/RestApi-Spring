@@ -22,7 +22,7 @@ public class CodeController {
     @PostMapping("/SetByOne/{token}/{id}")
     public ResponseEntity setSingleId(@PathVariable("id") Long id, @PathVariable("token") String token){
 
-        if(token.equals("NU5-&qRqt0XJPTI")) {
+        if(token.equals("######")) {
 
             code.setIdSingleCliente(id);
             return ResponseEntity.ok().build();
@@ -36,7 +36,7 @@ public class CodeController {
     //Get Page By Id
     @GetMapping("/GetPage/{token}")
     public ResponseEntity<?> getSingleId(@PathVariable("token") String token){
-        if(token.equals("yPfqEaJRa3Gn0Oy")) {
+        if(token.equals("######")) {
             Optional<Cliente> c = clienteRepository.findById(code.getIdSingleCliente());
 
             if (c.isPresent()) {

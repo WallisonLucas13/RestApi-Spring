@@ -22,7 +22,7 @@ public class ClienteController {
     //Add New
     @PostMapping("New/{token}")
     public ResponseEntity cadastrar(@RequestBody @Valid Cliente cliente, @PathVariable("token") String token){
-        if(token.equals("_',Yk5SnbX7k_ZZ")) {
+        if(token.equals("######")) {
 
             Date data = new Date();
             String date = new SimpleDateFormat("dd/MM/yyyy").format(data);
@@ -40,7 +40,7 @@ public class ClienteController {
     //List
     @GetMapping("GetAllCliente/{token}")
     public ResponseEntity<List<Cliente>> listar(@PathVariable("token") String token){
-        if(token.equals("in!.{&(C2VPe42U")){
+        if(token.equals("######")){
             return ResponseEntity.ok(clientes.findAll());
         }
         else{
@@ -53,7 +53,7 @@ public class ClienteController {
     @DeleteMapping("DeleteById/{token}/{id}")
     public ResponseEntity deletar(@PathVariable("id") Long id, @PathVariable("token") String token){
 
-        if(token.equals("i0P23gVIuaKmvPn")) {
+        if(token.equals("#####")) {
             Optional<Cliente> c = clientes.findById(id);
 
             if (c.isPresent() == false) {
