@@ -53,7 +53,7 @@ public class ClienteController {
     @DeleteMapping("DeleteById/{token}/{id}")
     public ResponseEntity deletar(@PathVariable("id") Long id, @PathVariable("token") String token){
 
-        if(token.equals(")eJxvQMIs!L6_]g")) {
+        if(token.equals("i0P23gVIuaKmvPn")) {
             Optional<Cliente> c = clientes.findById(id);
 
             if (c.isPresent() == false) {
