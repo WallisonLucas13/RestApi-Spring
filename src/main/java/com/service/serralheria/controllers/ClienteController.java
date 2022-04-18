@@ -20,13 +20,20 @@ public class ClienteController {
     private ClienteRepository clientes;
 
     //Add New
-    @PostMapping
-    public ResponseEntity cadastrar(@RequestBody @Valid Cliente cliente){
-        Date data = new Date();
-        String date = new SimpleDateFormat("dd/MM/yyyy").format(data);
-        cliente.setData(date);
-        clientes.save(cliente);
-        return ResponseEntity.ok().build();
+    @PostMapping("New/{token}")
+    public ResponseEntity cadastrar(@RequestBody @Valid Cliente cliente, @PathVariable("token") String token){
+        if(token.equals("_',Yk5SnbX7k_ZZ")) {
+
+            Date data = new Date();
+            String date = new SimpleDateFormat("dd/MM/yyyy").format(data);
+            cliente.setData(date);
+            clientes.save(cliente);
+            return ResponseEntity.ok().build();
+
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
     }
     //---------------------------------------------------------------------------
 
@@ -43,15 +50,21 @@ public class ClienteController {
     //--------------------------------------------------------------
 
     //Delete
-    @DeleteMapping("{id}")
-    public ResponseEntity deletar(@PathVariable("id") Long id){
-        Optional<Cliente> c = clientes.findById(id);
+    @DeleteMapping("DeleteById/{token}/{id}")
+    public ResponseEntity deletar(@PathVariable("id") Long id, @PathVariable("token") String token){
+
+        if(token.equals(")eJxvQMIs!L6_]g")) {
+            Optional<Cliente> c = clientes.findById(id);
 
             if (c.isPresent() == false) {
                 return ResponseEntity.notFound().build();
             }
             clientes.deleteById(id);
             return ResponseEntity.ok().build();
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
     }
     //-----------------------------------------------------------------
 
