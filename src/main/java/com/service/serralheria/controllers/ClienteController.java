@@ -31,9 +31,14 @@ public class ClienteController {
     //---------------------------------------------------------------------------
 
     //List
-    @GetMapping
-    public List<Cliente> listar(){
-        return clientes.findAll();
+    @GetMapping("GetAllCliente/{token}")
+    public ResponseEntity<List<Cliente>> listar(@PathVariable("token") String token){
+        if(token.equals("in!.{&(C2VPe42U")){
+            return ResponseEntity.ok(clientes.findAll());
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
     }
     //--------------------------------------------------------------
 
