@@ -36,7 +36,7 @@ public class CodeController {
     //Get Page By Id
     @GetMapping("/GetPage/{token}")
     public ResponseEntity<?> getSingleId(@PathVariable("token") String token){
-        if(token.equals("f#z}y-8IBm9+fgB")) {
+        if(token.equals("yPfqEaJRa3Gn0Oy")) {
             Optional<Cliente> c = clienteRepository.findById(code.getIdSingleCliente());
 
             if (c.isPresent()) {
